@@ -264,6 +264,8 @@ public class JugueteRecurso {
                 session.remove(juguete);
                 tx.commit();
                 
+                status = Response.Status.OK.getStatusCode();
+                        
             } else {
             
                 status = Response.Status.NOT_FOUND.getStatusCode();
