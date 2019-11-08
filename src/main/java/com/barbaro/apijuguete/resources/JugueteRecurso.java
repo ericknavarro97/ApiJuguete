@@ -11,6 +11,7 @@ package com.barbaro.apijuguete.resources;
  */
 import com.barbaro.apijuguete.Models.Juguete;
 import com.barbaro.apijuguete.util.HibernateUtil;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -181,7 +182,7 @@ public class JugueteRecurso {
             
             //Operaciones con la base de datos
             
-            session.find(Juguete.class, id); 
+            jugueteDB = session.find(Juguete.class, id); 
             
             if(jugueteDB != null){
             
@@ -196,6 +197,8 @@ public class JugueteRecurso {
                 tx.commit();
                 
                 status = Response.Status.OK.getStatusCode();
+                mensaje = "Se actualizo el recurso";
+                codigoInt = 1;
                 
             } else{
             
@@ -228,18 +231,20 @@ public class JugueteRecurso {
 
         }
         
+        // Configurar datos de respuesta
         response = new HashMap<>();
-        
-        response.put("codigo: ", codigoInt);
-        response.put("Mensaje: ", mensaje);
-        response.put("Data: ", response);
-       
+        response.put("codigo", codigoInt);
+        response.put("mensaje", mensaje);
+        response.put("data", jugueteDB);
+
+        // Construir la respuesta
         return Response.status(status).entity(response).build();
 
     }
     
     @DELETE
     @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response deleteJuguete(@PathParam("id") Integer id){
         
         Session session = null;
@@ -265,6 +270,8 @@ public class JugueteRecurso {
                 tx.commit();
                 
                 status = Response.Status.OK.getStatusCode();
+                
+                mensaje = "Recurso Eliminado";
                         
             } else {
             
@@ -299,9 +306,9 @@ public class JugueteRecurso {
         
         response = new HashMap<>();
         
-        response.put("codigo: ", codigoInt);
+        response.put("Codigo: ", codigoInt);
         response.put("Mensaje: ", mensaje);
-        response.put("Data: ", response);
+        response.put("Data: ", null);
        
         return Response.status(status).entity(response).build();
     
