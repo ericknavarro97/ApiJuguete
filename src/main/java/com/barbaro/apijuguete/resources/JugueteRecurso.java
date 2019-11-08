@@ -233,9 +233,9 @@ public class JugueteRecurso {
         
         // Configurar datos de respuesta
         response = new HashMap<>();
-        response.put("codigo", codigoInt);
-        response.put("mensaje", mensaje);
-        response.put("data", jugueteDB);
+        response.put("Codigo", codigoInt);
+        response.put("Mensaje", mensaje);
+        response.put("Data", jugueteDB);
 
         // Construir la respuesta
         return Response.status(status).entity(response).build();
