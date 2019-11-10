@@ -33,6 +33,7 @@ public class Bolsa {
     private String color;
     @Column
     private Date fecha;
+    
     @OneToMany
     @JoinTable
     private List<Juguete> juguetes;
